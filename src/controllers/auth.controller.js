@@ -47,3 +47,15 @@ export async function signIn(req, res) {
     res.status(422).send(error.message)
   }
 }
+
+export async function searchUser(req, res) {
+  console.log("searchQuery (lsearchUser)") //deletar linha depois
+  const { searchQuery } = req.body
+
+  try {
+    const users = await db.query(` SELECT id, username, picture_url FROM users WHERE username ILIKE $1;`,[searchQuery+"%"])
+    res.send(users.rows).status(200)
+  } catch (error) {
+    
+  }
+}

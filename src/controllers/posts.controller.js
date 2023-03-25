@@ -32,15 +32,13 @@ export const getPostsController = async (req, res) => {
 };
 
 export const createPostController = async (req, res) => {
-  const { content, sharedUrl, userId } = req.Params;
-  const hashtags = content
-    .split(' ')
-    .filter((str) => str[0] === '#' && str.length > 1)
-    .map((str) => str.slice(1));
+  const { content, sharedUrl, user_id } = req.body;
+  //const hashtags = content.split(' ').filter((str) => str[0] === '#' && str.length > 1).map((str) => str.slice(1));
 
   console.log(chalk.cyan('POST /posts'));
   try {
-    const { rows: posts } = await createPost({ content, sharedUrl, userId });
+    const { rows: posts } = await createPost({ content, sharedUrl, user_id });
+    /*
     for (const hashtag of hashtags) {
       const { rows } = await searchHashtagName(hashtag);
       let id = rows[0]?.id;
@@ -50,7 +48,8 @@ export const createPostController = async (req, res) => {
       }
 
       await addHashtagPost(id, posts[0].id);
-    }
+    }*/
+
     res.sendStatus(201);
   } catch (error) {
     if (error.code === foreingKeyConstraint) {

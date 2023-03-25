@@ -1,10 +1,10 @@
 import {db} from '../database/database.connection.js';
 
-export const createPost = ({ content, sharedUrl, userId }) =>
-  db.query('INSERT INTO posts (content, shared_url, user_id) VALUES($1, $2, $3) RETURNING idha;', [
+export const createPost = ({ content, sharedUrl, user_id }) =>
+  db.query('INSERT INTO posts (content, shared_url, user_id) VALUES($1, $2, $3);', [
     content,
     sharedUrl,
-    userId,
+    user_id,
   ]);
 
 export const getPosts = () =>

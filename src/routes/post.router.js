@@ -7,6 +7,6 @@ import { createPostSchema, getPostsSchema } from '../schemas/posts.requests.js';
 const router = new Router();
 
 router.get('/', processRequestParams(getPostsSchema), authenticate, getPostsController);
-router.post('/', processRequestParams(createPostSchema), authenticate, createPostController);
+router.post('/', createPostController);
 
 export { router as postRouter };
